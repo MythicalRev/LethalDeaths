@@ -72,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Patches\MenuManagerPatch.cs" />
     <Compile Include="Patches\SaveFileUISlotPatch.cs" />
     <Compile Include="Patches\PlayerControllerBPatch.cs" />
     <Compile Include="Patches\StartOfRoundPatch.cs" />

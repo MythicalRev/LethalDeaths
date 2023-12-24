@@ -60,6 +60,7 @@ namespace LethalDeaths
             harmony.PatchAll(typeof(Patches.PlayerControllerBPatch));
             harmony.PatchAll(typeof(Patches.StartOfRoundPatch));
             harmony.PatchAll(typeof(Patches.SaveFileUISlotPatch));
+            harmony.PatchAll(typeof(Patches.MenuManagerPatch));
             mls.LogInfo("LethalDeaths Patched");
             setupConfigs();
         }
