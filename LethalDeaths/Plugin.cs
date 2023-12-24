@@ -16,7 +16,7 @@ namespace LethalDeaths
     {
         private const string modGUID = "MythicalRev.LethalDeaths";
         private const string modName = "LethalDeaths";
-        private const string modVersion = "1.0.2";
+        private const string modVersion = "1.0.3";
 
         private readonly Harmony harmony = new Harmony(modGUID);
 
@@ -40,10 +40,9 @@ namespace LethalDeaths
         public static ConfigEntry<float> deathspeedConfSF2;
         public static ConfigEntry<float> deathspeedConfSF3;
 
-        public static ConfigEntry<bool> modEnabledSF1;
-        public static ConfigEntry<bool> modEnabledSF2;
-        public static ConfigEntry<bool> modEnabledSF3;
-        //public static ConfigEntry<bool> weightIncreaseToggle;
+        public static ConfigEntry<bool> weightIncreaseToggle;
+        public static ConfigEntry<bool> healthDecreaseToggle;
+        public static ConfigEntry<bool> sprintAmoundDecToggle;
 
         void Awake()
         {
@@ -60,14 +59,16 @@ namespace LethalDeaths
             harmony.PatchAll(typeof(Patches.PlayerControllerBPatch));
             harmony.PatchAll(typeof(Patches.StartOfRoundPatch));
             harmony.PatchAll(typeof(Patches.SaveFileUISlotPatch));
-            harmony.PatchAll(typeof(Patches.MenuManagerPatch));
+            harmony.PatchAll(typeof(Patches.DeleteFilePatch));
             mls.LogInfo("LethalDeaths Patched");
             setupConfigs();
         }
 
         private void setupConfigs()
         {
-            //weightIncreaseToggle = Config.Bind("Config", "Weight Increase Enabled", true, "Does Your Weight Increase on Death");
+            weightIncreaseToggle = Config.Bind("Config", "Weight Increase Enabled", true, "Does Your Weight Increase on Death");
+            healthDecreaseToggle = Config.Bind("Config", "Health Decrease Enabled", true, "Does Your Health Decrease on Death");
+            sprintAmoundDecToggle = Config.Bind("Config", "Sprint Decrease Enabled", true, "Does Your Sprint Decrease on Death");
 
             deathcountConfSF1 = Config.Bind("Save Data", "Death Value File 1", 10, "Number Of Deaths Left, MIN 10 - MAX 1");
             deathcountConfSF2 = Config.Bind("Save Data", "Death Value File 2", 10, "Number Of Deaths Left, MIN 10 - MAX 1");

@@ -26,44 +26,74 @@ namespace LethalDeaths.Patches
                 debounce = true;
                 if (saveNum == 0)
                 {
-                    Plugin.deathamountConfSF1.Value += .1f;
-                    Plugin.deathspeedConfSF1.Value -= .1f;
-
-                    if (Plugin.deathcountConfSF1.Value != 0)
+                    if (Plugin.sprintAmoundDecToggle.Value)
                     {
-                        Plugin.deathcountConfSF1.Value -= 1;
+                        Plugin.deathspeedConfSF1.Value -= .1f;
                     }
-                    else
+
+                    if (Plugin.weightIncreaseToggle.Value)
                     {
-                        Plugin.deathcountConfSF1.Value = Plugin.maxdeaths;
+                        Plugin.deathamountConfSF1.Value += .1f;
+                    }
+                    
+                    if (Plugin.healthDecreaseToggle.Value)
+                    {
+                        if (Plugin.deathcountConfSF1.Value != 0)
+                        {
+                            Plugin.deathcountConfSF1.Value -= 1;
+                        }
+                        else
+                        {
+                            Plugin.deathcountConfSF1.Value = Plugin.maxdeaths;
+                        }
                     }
                 }
                 else if (saveNum == 1)
                 {
-                    Plugin.deathamountConfSF2.Value += .1f;
-                    Plugin.deathspeedConfSF2.Value -= .1f;
-
-                    if (Plugin.deathcountConfSF2.Value != 0)
+                    if (Plugin.sprintAmoundDecToggle.Value)
                     {
-                        Plugin.deathcountConfSF2.Value -= 1;
+                        Plugin.deathspeedConfSF2.Value -= .1f;
                     }
-                    else
+
+                    if (Plugin.weightIncreaseToggle.Value)
                     {
-                        Plugin.deathcountConfSF2.Value = Plugin.maxdeaths;
+                        Plugin.deathamountConfSF2.Value += .1f;
+                    }
+
+                    if (Plugin.healthDecreaseToggle.Value)
+                    {
+                        if (Plugin.deathcountConfSF2.Value != 0)
+                        {
+                            Plugin.deathcountConfSF2.Value -= 1;
+                        }
+                        else
+                        {
+                            Plugin.deathcountConfSF2.Value = Plugin.maxdeaths;
+                        }
                     }
                 }
                 else if (saveNum == 2)
                 {
-                    Plugin.deathamountConfSF3.Value += .1f;
-                    Plugin.deathspeedConfSF3.Value -= .1f;
-
-                    if (Plugin.deathcountConfSF3.Value != 0)
+                    if (Plugin.sprintAmoundDecToggle.Value)
                     {
-                        Plugin.deathcountConfSF3.Value -= 1;
+                        Plugin.deathspeedConfSF3.Value -= .1f;
                     }
-                    else
+
+                    if (Plugin.weightIncreaseToggle.Value)
                     {
-                        Plugin.deathcountConfSF3.Value = Plugin.maxdeaths;
+                        Plugin.deathamountConfSF3.Value += .1f;
+                    }
+
+                    if (Plugin.healthDecreaseToggle.Value)
+                    {
+                        if (Plugin.deathcountConfSF3.Value != 0)
+                        {
+                            Plugin.deathcountConfSF3.Value -= 1;
+                        }
+                        else
+                        {
+                            Plugin.deathcountConfSF3.Value = Plugin.maxdeaths;
+                        }
                     }
                 }
             }
