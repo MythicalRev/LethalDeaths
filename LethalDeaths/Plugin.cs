@@ -24,7 +24,6 @@ namespace LethalDeaths
 
         public static ManualLogSource mls;
 
-        //internal static int deathcount = 10;
         internal static int maxdeaths = 1;
 
         // Configs
@@ -32,6 +31,14 @@ namespace LethalDeaths
         public static ConfigEntry<int> deathcountConfSF1;
         public static ConfigEntry<int> deathcountConfSF2;
         public static ConfigEntry<int> deathcountConfSF3;
+
+        public static ConfigEntry<float> deathamountConfSF1;
+        public static ConfigEntry<float> deathamountConfSF2;
+        public static ConfigEntry<float> deathamountConfSF3;
+
+        public static ConfigEntry<float> deathspeedConfSF1;
+        public static ConfigEntry<float> deathspeedConfSF2;
+        public static ConfigEntry<float> deathspeedConfSF3;
 
         public static ConfigEntry<bool> modEnabledSF1;
         public static ConfigEntry<bool> modEnabledSF2;
@@ -64,6 +71,14 @@ namespace LethalDeaths
             deathcountConfSF1 = Config.Bind("Save Data", "Death Value File 1", 10, "Number Of Deaths Left, MIN 10 - MAX 1");
             deathcountConfSF2 = Config.Bind("Save Data", "Death Value File 2", 10, "Number Of Deaths Left, MIN 10 - MAX 1");
             deathcountConfSF3 = Config.Bind("Save Data", "Death Value File 3", 10, "Number Of Deaths Left, MIN 10 - MAX 1");
+
+            deathamountConfSF1 = Config.Bind("Save Data", "Death Amount File 1", 0f, "Death Count Number, Min 0 - Max 100");
+            deathamountConfSF2 = Config.Bind("Save Data", "Death Amount File 2", 0f, "Death Count Number, Min 0 - Max 100");
+            deathamountConfSF3 = Config.Bind("Save Data", "Death Amount File 3", 0f, "Death Count Number, Min 0 - Max 100");
+
+            deathspeedConfSF1 = Config.Bind("Save Data", "Death Amount File Sprint 1", 1f, "Death Count Number Sprint, Min 1 - Max 0");
+            deathspeedConfSF2 = Config.Bind("Save Data", "Death Amount File Sprint 2", 1f, "Death Count Number Sprint, Min 1 - Max 0");
+            deathspeedConfSF3 = Config.Bind("Save Data", "Death Amount File Sprint 3", 1f, "Death Count Number Sprint, Min 1 - Max 1000");
         }
     }
 }

@@ -26,6 +26,9 @@ namespace LethalDeaths.Patches
                 debounce = true;
                 if (saveNum == 0)
                 {
+                    Plugin.deathamountConfSF1.Value += .1f;
+                    Plugin.deathspeedConfSF1.Value -= .1f;
+
                     if (Plugin.deathcountConfSF1.Value != 0)
                     {
                         Plugin.deathcountConfSF1.Value -= 1;
@@ -37,6 +40,9 @@ namespace LethalDeaths.Patches
                 }
                 else if (saveNum == 1)
                 {
+                    Plugin.deathamountConfSF2.Value += .1f;
+                    Plugin.deathspeedConfSF2.Value -= .1f;
+
                     if (Plugin.deathcountConfSF2.Value != 0)
                     {
                         Plugin.deathcountConfSF2.Value -= 1;
@@ -46,8 +52,11 @@ namespace LethalDeaths.Patches
                         Plugin.deathcountConfSF2.Value = Plugin.maxdeaths;
                     }
                 }
-                else if (saveNum == 1)
+                else if (saveNum == 2)
                 {
+                    Plugin.deathamountConfSF3.Value += .1f;
+                    Plugin.deathspeedConfSF3.Value -= .1f;
+
                     if (Plugin.deathcountConfSF3.Value != 0)
                     {
                         Plugin.deathcountConfSF3.Value -= 1;
@@ -56,6 +65,37 @@ namespace LethalDeaths.Patches
                     {
                         Plugin.deathcountConfSF3.Value = Plugin.maxdeaths;
                     }
+                }
+            }
+        }
+
+        [HarmonyPatch("Update")]
+        [HarmonyPostfix]
+        public static void maxSprintSet(ref float ___sprintMeter)
+        {
+            GameNetworkManager gameNetworkManager = GameNetworkManager.Instance;
+
+            int saveNum = gameNetworkManager.saveFileNum;
+
+            if (saveNum == 0)
+            {
+                if (___sprintMeter > Plugin.deathspeedConfSF1.Value)
+                {
+                    ___sprintMeter = Plugin.deathspeedConfSF1.Value;
+                }
+            }
+            else if (saveNum == 1)
+            {
+                if (___sprintMeter > Plugin.deathspeedConfSF2.Value)
+                {
+                    ___sprintMeter = Plugin.deathspeedConfSF2.Value;
+                }
+            }
+            else if (saveNum == 2)
+            {
+                if (___sprintMeter > Plugin.deathspeedConfSF3.Value)
+                {
+                    ___sprintMeter = Plugin.deathspeedConfSF3.Value;
                 }
             }
         }

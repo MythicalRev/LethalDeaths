@@ -11,6 +11,8 @@ namespace LethalDeaths.Patches
     [HarmonyPatch(typeof(StartOfRound))]
     class StartOfRoundPatch
     {
+        private static string fileString;
+        private static int fileNum;
 
         [HarmonyPatch("StartGame")]
         [HarmonyPostfix]
@@ -26,19 +28,22 @@ namespace LethalDeaths.Patches
                 {
                     PlayerControllerB playerControllerB = GameNetworkManager.Instance.localPlayerController;
                     playerControllerB.health = Plugin.deathcountConfSF1.Value * 10;
-                    Plugin.mls.LogInfo("New Health = " + playerControllerB.health.ToString());
+                    playerControllerB.carryWeight = playerControllerB.carryWeight + Plugin.deathamountConfSF1.Value;
+                    playerControllerB.sprintMeter = Plugin.deathspeedConfSF1.Value;
                 }
                 else if (saveNum == 1)
                 {
                     PlayerControllerB playerControllerB = GameNetworkManager.Instance.localPlayerController;
                     playerControllerB.health = Plugin.deathcountConfSF2.Value * 10;
-                    Plugin.mls.LogInfo("New Health = " + playerControllerB.health.ToString());
+                    playerControllerB.carryWeight = playerControllerB.carryWeight + Plugin.deathamountConfSF2.Value;
+                    playerControllerB.sprintMeter = Plugin.deathspeedConfSF2.Value;
                 }
                 else if (saveNum == 2)
                 {
                     PlayerControllerB playerControllerB = GameNetworkManager.Instance.localPlayerController;
                     playerControllerB.health = Plugin.deathcountConfSF3.Value * 10;
-                    Plugin.mls.LogInfo("New Health = " + playerControllerB.health.ToString());
+                    playerControllerB.carryWeight = playerControllerB.carryWeight + Plugin.deathamountConfSF3.Value;
+                    playerControllerB.sprintMeter = Plugin.deathspeedConfSF3.Value;
                 }
             }
         }
@@ -56,16 +61,69 @@ namespace LethalDeaths.Patches
             if (saveNum == 0)
             {
                 Plugin.deathcountConfSF1.Value = 10;
+                Plugin.deathamountConfSF1.Value = 0f;
+                Plugin.deathspeedConfSF1.Value = 1f;
             }
             else if (saveNum == 1)
             {
                 Plugin.deathcountConfSF2.Value = 10;
+                Plugin.deathamountConfSF2.Value = 0f;
+                Plugin.deathspeedConfSF2.Value = 1f;
             }
             else if (saveNum == 2)
             {
                 Plugin.deathcountConfSF3.Value = 10;
+                Plugin.deathamountConfSF3.Value = 0f;
+                Plugin.deathspeedConfSF3.Value = 1f;
             }
         }
 
+        [HarmonyPatch("Awake")]
+        [HarmonyPostfix]
+        public static void setupDelReset()
+        {
+            switch (fileNum)
+            {
+                case 0:
+                    fileString = "LCSaveFile1";
+                    break;
+                case 1:
+                    fileString = "LCSaveFile2";
+                    break;
+                case 2:
+                    fileString = "LCSaveFile3";
+                    break;
+                default:
+                    fileString = "LCSaveFile1";
+                    break;
+            }
+        }
+
+        [HarmonyPatch("Update")]
+        [HarmonyPostfix]
+        public static void resetDeathOnFileDel()
+        {
+            if (!ES3.FileExists(fileString))
+            {
+                if (fileString == "LCSaveFile1")
+                {
+                    Plugin.deathcountConfSF1.Value = 10;
+                    Plugin.deathamountConfSF1.Value = 0f;
+                    Plugin.deathspeedConfSF1.Value = 1f;
+                }
+                else if (fileString == "LCSaveFile2")
+                {
+                    Plugin.deathcountConfSF2.Value = 10;
+                    Plugin.deathamountConfSF2.Value = 0f;
+                    Plugin.deathspeedConfSF2.Value = 1f;
+                }
+                else if (fileString == "LCSaveFile3")
+                {
+                    Plugin.deathcountConfSF3.Value = 10;
+                    Plugin.deathamountConfSF3.Value = 0f;
+                    Plugin.deathspeedConfSF3.Value = 1f;
+                }
+            }
+        }
     }
 }
